@@ -30,18 +30,19 @@ jobs:
         with:
           api-level: 34
           build-tools-version: 34.0.0
-          cmake-version: 3.22.1
+          cmdline-tools-version: 11.0
           ndk-version: r26d
           emulator: false
-          cache-key: ${{ runner.os }}-android-sdk-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          platform-tools: true
 
-      - name: Verify Android SDK
+      - name: Verify Android SDK Installation
         run: |
           echo "ANDROID_HOME = $ANDROID_HOME"
           echo "ANDROID_SDK_ROOT = $ANDROID_SDK_ROOT"
-          ls -la $ANDROID_HOME
-          ls -la $ANDROID_HOME/cmdline-tools/latest/bin/
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
+          echo "PATH = $PATH"
+          which sdkmanager
+          sdkmanager --version
+          sdkmanager --list_installed | head -20
 
       - name: Cache Gradle packages
         uses: actions/cache@v4
@@ -64,9 +65,9 @@ jobs:
           fi
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
         env:
-          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.parallel=true"
+          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.parallel=true -Dorg.gradle.configureondemand=true"
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
@@ -98,7 +99,7 @@ jobs:
         with:
           api-level: 34
           build-tools-version: 34.0.0
-          cmake-version: 3.22.1
+          cmdline-tools-version: 11.0
           ndk-version: r26d
           emulator: false
 
@@ -116,9 +117,9 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Release APK
-        run: ./gradlew assembleRelease --no-daemon
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
         env:
-          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.parallel=true"
+          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.parallel=true -Dorg.gradle.configureondemand=true"
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
@@ -176,7 +177,7 @@ jobs:
         with:
           api-level: 34
           build-tools-version: 34.0.0
-          cmake-version: 3.22.1
+          cmdline-tools-version: 11.0
           ndk-version: r26d
 
       - name: Grant execute permission for gradlew
@@ -226,7 +227,7 @@ jobs:
         with:
           api-level: 34
           build-tools-version: 34.0.0
-          cmake-version: 3.22.1
+          cmdline-tools-version: 11.0
           ndk-version: r26d
 
       - name: Grant execute permission for gradlew
@@ -242,14 +243,3 @@ jobs:
           name: test-reports
           path: app/build/reports/tests/
           retention-days: 7
-
-      - name: Run Instrumented Tests (with emulator)
-        run: |
-          echo "Instrumented tests require emulator - skipped in this workflow"
-          # Uncomment below to enable (requires more resources)
-          # emulator -avd test -no-snapshot-load -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -skin 1080x1920 &
-          # sleep 30
-          # adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
-          # ./gradlew connectedDebugAndroidTest --no-daemon
-        shell: bash
-        continue-on-error: true
