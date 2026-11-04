@@ -48,7 +48,7 @@ compose-animation = { module = "androidx.compose.animation:animation" }
 
 # Navigation
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "1.2.0" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 # Lifecycle & ViewModel
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
