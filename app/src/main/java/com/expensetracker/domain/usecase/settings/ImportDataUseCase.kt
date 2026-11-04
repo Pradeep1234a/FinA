@@ -7,7 +7,7 @@ import kotlin.Result
 class ImportDataUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) {
-    operator fun invoke(file: File): Result<Unit> {
+    suspend operator fun invoke(file: File): Result<Unit> {
         return settingsRepository.importData(file)
     }
 }

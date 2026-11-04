@@ -7,7 +7,7 @@ import kotlin.Result
 class ExportDataUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) {
-    operator fun invoke(): Result<File> {
+    suspend operator fun invoke(): Result<File> {
         return settingsRepository.exportData()
     }
 }

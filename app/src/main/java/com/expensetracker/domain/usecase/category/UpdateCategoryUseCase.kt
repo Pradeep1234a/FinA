@@ -7,7 +7,7 @@ import kotlin.Result
 class UpdateCategoryUseCase @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) {
-    operator fun invoke(category: Category): Result<Unit> {
+    suspend operator fun invoke(category: Category): Result<Unit> {
         return try {
             categoryRepository.updateCategory(category)
             Result.success(Unit)

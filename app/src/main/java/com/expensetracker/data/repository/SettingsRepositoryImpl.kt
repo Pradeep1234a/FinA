@@ -15,6 +15,7 @@ import com.expensetracker.domain.model.Budget
 import com.expensetracker.domain.model.Category
 import com.expensetracker.domain.model.CategoryType
 import com.expensetracker.domain.model.RecurringTransaction
+import com.expensetracker.domain.model.RecurrenceType
 import com.expensetracker.domain.model.Settings
 import com.expensetracker.domain.model.Transaction
 import com.expensetracker.domain.model.TransactionType
@@ -162,26 +163,65 @@ class SettingsRepositoryImpl @Inject constructor(
                 return Result.failure(IllegalArgumentException("Invalid export directory"))
             }
 
-            val transactionsFile = File(file, "transactions.csv")
-            if (transactionsFile.exists()) {
-                // Parse and insert transactions - requires CSV parsing logic
-            }
-
+            // Import categories first (required for foreign keys in other entities)
             val categoriesFile = File(file, "categories.csv")
+            var importedCategories = mutableListOf<Category>()
             if (categoriesFile.exists()) {
-                // Parse and insert categories
+                val result = ExportUtils.parseCategoriesCsv(categoriesFile)
+                if (result.isSuccess) {
+                    importedCategories = result.getOrNull()?.toMutableList() ?: mutableListOf()
+                    for (category in importedCategories) {
+                        if (!category.isSystem) {
+                            val entity = CategoryMapper.toEntityForInsert(category)
+                            categoryDao.insert(entity).await()
+                        }
+                    }
+                }
             }
 
-            val budgetsFile = File(file, "budgets.csv")
-            if (budgetsFile.exists()) {
-                // Parse and insert budgets
-            }
+            // Get all categories after import for foreign key references
+            val allCategories = categoryDao.getAll().first().map { CategoryMapper.toDomain(it) }
 
+            // Import recurring transactions
             val recurringFile = File(file, "recurring_transactions.csv")
             if (recurringFile.exists()) {
-                // Parse and insert recurring transactions
+                val result = ExportUtils.parseRecurringCsv(recurringFile, allCategories)
+                if (result.isSuccess) {
+                    val recurringList = result.getOrNull() ?: emptyList()
+                    for (recurring in recurringList) {
+                        val entity = RecurringTransactionMapper.toEntityForInsert(recurring)
+                        recurringTransactionDao.insert(entity).await()
+                    }
+                }
             }
 
+            // Import budgets
+            val budgetsFile = File(file, "budgets.csv")
+            if (budgetsFile.exists()) {
+                val result = ExportUtils.parseBudgetsCsv(budgetsFile, allCategories)
+                if (result.isSuccess) {
+                    val budgetsList = result.getOrNull() ?: emptyList()
+                    for (budget in budgetsList) {
+                        val entity = BudgetMapper.toEntityForInsert(budget)
+                        budgetDao.insert(entity).await()
+                    }
+                }
+            }
+
+            // Import transactions
+            val transactionsFile = File(file, "transactions.csv")
+            if (transactionsFile.exists()) {
+                val result = ExportUtils.parseTransactionsCsv(transactionsFile, allCategories)
+                if (result.isSuccess) {
+                    val transactionsList = result.getOrNull() ?: emptyList()
+                    for (transaction in transactionsList) {
+                        val entity = TransactionMapper.toEntityForInsert(transaction)
+                        transactionDao.insert(entity).await()
+                    }
+                }
+            }
+
+            // Import settings
             val settingsFile = File(file, "settings.json")
             if (settingsFile.exists()) {
                 val json = Json { ignoreUnknownKeys = true }

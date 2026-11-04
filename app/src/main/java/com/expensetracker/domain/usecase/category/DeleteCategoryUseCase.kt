@@ -6,7 +6,7 @@ import kotlin.Result
 class DeleteCategoryUseCase @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) {
-    operator fun invoke(id: Long): Result<Unit> {
+    suspend operator fun invoke(id: Long): Result<Unit> {
         return try {
             categoryRepository.deleteCategory(id)
             Result.success(Unit)

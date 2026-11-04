@@ -6,7 +6,7 @@ import kotlin.Result
 class UpdateCurrencyUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) {
-    operator fun invoke(currency: String): Result<Unit> {
+    suspend operator fun invoke(currency: String): Result<Unit> {
         return try {
             settingsRepository.updateCurrency(currency)
             Result.success(Unit)

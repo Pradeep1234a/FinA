@@ -13,7 +13,7 @@ class ProcessDueRecurringTransactionsUseCase @Inject constructor(
     private val recurringTransactionRepository: RecurringTransactionRepository,
     private val transactionRepository: TransactionRepository
 ) {
-    operator fun invoke(): Result<List<Long>> {
+    suspend operator fun invoke(): Result<List<Long>> {
         return try {
             val dueTransactions = recurringTransactionRepository.getDueRecurringTransactions()
             val generatedIds = mutableListOf<Long>()

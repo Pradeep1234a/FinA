@@ -36,7 +36,7 @@
     <!-- Transaction Screen -->
     <string name="transactions_title">Transactions</string>
     <string name="transactions_filter">Filter</string>
-    <string name="transactions_search_hint">Search transactions…</string>
+    <string name="transactions_search_hint">Search transactions&hellip;</string>
     <string name="transactions_empty">No transactions found</string>
     <string name="transactions_empty_desc">Pull to refresh or add a new transaction</string>
     <string name="transactions_swipe_delete">Delete</string>
@@ -65,7 +65,7 @@
     <string name="transaction_category_hint">Select category</string>
     <string name="transaction_date">Date</string>
     <string name="transaction_note">Note (optional)</string>
-    <string name="transaction_note_hint">Add a note…</string>
+    <string name="transaction_note_hint">Add a note&hellip;</string>
     <string name="transaction_save">Save</string>
     <string name="transaction_cancel">Cancel</string>
     <string name="transaction_delete">Delete</string>
@@ -201,7 +201,7 @@
     <string name="done">Done</string>
     <string name="close">Close</string>
     <string name="retry">Retry</string>
-    <string name="loading">Loading…</string>
+    <string name="loading">Loading&hellip;</string>
     <string name="error_generic">Something went wrong</string>
     <string name="error_network">Network error</string>
     <string name="error_storage">Storage error</string>

@@ -12,7 +12,7 @@ class GenerateRecurringTransactionUseCase @Inject constructor(
     private val recurringTransactionRepository: RecurringTransactionRepository,
     private val transactionRepository: TransactionRepository
 ) {
-    operator fun invoke(recurringTransactionId: Long): Result<Long> {
+    suspend operator fun invoke(recurringTransactionId: Long): Result<Long> {
         return try {
             val recurring = recurringTransactionRepository.getRecurringTransaction(recurringTransactionId)
                 ?: return Result.failure(IllegalArgumentException("Recurring transaction not found with id: $recurringTransactionId"))

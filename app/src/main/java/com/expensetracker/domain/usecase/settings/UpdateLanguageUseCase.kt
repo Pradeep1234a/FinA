@@ -6,7 +6,7 @@ import kotlin.Result
 class UpdateLanguageUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) {
-    operator fun invoke(language: String): Result<Unit> {
+    suspend operator fun invoke(language: String): Result<Unit> {
         return try {
             settingsRepository.updateLanguage(language)
             Result.success(Unit)

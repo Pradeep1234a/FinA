@@ -7,7 +7,7 @@ import kotlin.Result
 class AddCategoryUseCase @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) {
-    operator fun invoke(category: Category): Result<Long> {
+    suspend operator fun invoke(category: Category): Result<Long> {
         return try {
             val id = categoryRepository.addCategory(category)
             Result.success(id)

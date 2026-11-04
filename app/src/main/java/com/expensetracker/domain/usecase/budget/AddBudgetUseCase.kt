@@ -7,7 +7,7 @@ import kotlin.Result
 class AddBudgetUseCase @Inject constructor(
     private val budgetRepository: BudgetRepository
 ) {
-    operator fun invoke(budget: Budget): Result<Long> {
+    suspend operator fun invoke(budget: Budget): Result<Long> {
         return try {
             val id = budgetRepository.addBudget(budget)
             Result.success(id)

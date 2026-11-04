@@ -6,7 +6,7 @@ import kotlin.Result
 class DeleteBudgetUseCase @Inject constructor(
     private val budgetRepository: BudgetRepository
 ) {
-    operator fun invoke(id: Long): Result<Unit> {
+    suspend operator fun invoke(id: Long): Result<Unit> {
         return try {
             budgetRepository.deleteBudget(id)
             Result.success(Unit)

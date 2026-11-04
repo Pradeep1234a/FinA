@@ -7,7 +7,7 @@ import kotlin.Result
 class UpdateThemeUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) {
-    operator fun invoke(theme: ThemeMode): Result<Unit> {
+    suspend operator fun invoke(theme: ThemeMode): Result<Unit> {
         return try {
             settingsRepository.updateTheme(theme)
             Result.success(Unit)

@@ -126,8 +126,8 @@ export const usePlayerStore = create<PlayerStore>()(
       Object.assign(state, initialState)
     }),
 
-    loadFromSave: (save: PlayerState) => set((state) => {
-      Object.assign(state, save)
+    loadFromSave: (save: PlayerState) => set((_state) => {
+      Object.assign(_state, save)
     }),
   }))
 )

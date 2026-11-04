@@ -6,7 +6,7 @@ import kotlin.Result
 class DeleteRecurringTransactionUseCase @Inject constructor(
     private val recurringTransactionRepository: RecurringTransactionRepository
 ) {
-    operator fun invoke(id: Long): Result<Unit> {
+    suspend operator fun invoke(id: Long): Result<Unit> {
         return try {
             recurringTransactionRepository.deleteRecurringTransaction(id)
             Result.success(Unit)

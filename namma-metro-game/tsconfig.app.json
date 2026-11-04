@@ -23,6 +23,7 @@
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@stores/*": ["./src/stores/*"],
+      "@types": ["./src/types/index.ts"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./public/assets/*"]

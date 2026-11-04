@@ -8,7 +8,7 @@ import kotlin.Result
 class GetBudgetUseCase @Inject constructor(
     private val budgetRepository: BudgetRepository
 ) {
-    operator fun invoke(categoryId: Long, monthYear: YearMonth): Result<Budget> {
+    suspend operator fun invoke(categoryId: Long, monthYear: YearMonth): Result<Budget> {
         return try {
             val budget = budgetRepository.getBudget(categoryId, monthYear)
             if (budget != null) {

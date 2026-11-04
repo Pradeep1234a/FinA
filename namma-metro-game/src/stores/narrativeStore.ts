@@ -5,10 +5,15 @@ import type {
   QuestObjective,
   DialogueNode,
   DialogueChoice,
+  DialogueAction,
   StoryFlag,
   StoryState,
   QuestReward,
-} from '@types'
+  DialogueCondition,
+} from '@/types'
+import { usePlayerStore } from './playerStore'
+import { useWorldStore } from './worldStore'
+import { useGameStore } from './gameStore'
 
 interface NarrativeStore extends StoryState {
   // Quest management
@@ -19,8 +24,10 @@ interface NarrativeStore extends StoryState {
   currentDialogueNodeId: string | null
   dialogueHistory: Array<{ nodeId: string; choiceId?: string; timestamp: number }>
 
-  // Actions
-  // Quests
+  // Event emitter
+  emit: (type: string, payload: unknown) => void
+
+  // Quest actions
   registerQuest: (quest: Quest) => void
   getQuest: (questId: string) => Quest | undefined
   getQuestsByType: (type: Quest['type']) => Quest[]
@@ -41,7 +48,8 @@ interface NarrativeStore extends StoryState {
   makeChoice: (choiceId: string) => void
   getCurrentNode: () => DialogueNode | null
   getAvailableChoices: () => DialogueChoice[]
-  evaluateConditions: (conditions: DialogueNode['conditions']) => boolean
+  evaluateConditions: (conditions: DialogueCondition[]) => boolean
+  executeDialogueAction: (action: DialogueAction) => void
 
   // Story flags
   setFlag: (flagId: string, value: boolean | number | string) => void
@@ -77,12 +85,17 @@ const initialState: StoryState = {
 export const useNarrativeStore = create<NarrativeStore>()(
   immer((set, get) => ({
     ...initialState,
-    quests: new Map(),
+    quests: new Map<string, Quest>(),
     activeQuestId: null,
-    dialogueTree: new Map(),
+    dialogueTree: new Map<string, DialogueNode>(),
     currentDialogueId: null,
     currentDialogueNodeId: null,
     dialogueHistory: [],
+
+    // Event emitter
+    emit: (type: string, payload: unknown) => {
+      useGameStore.getState().emit(type, payload)
+    },
 
     // Quests
     registerQuest: (quest: Quest) => set((state) => {
@@ -279,7 +292,7 @@ export const useNarrativeStore = create<NarrativeStore>()(
       return node.choices.filter(choice => get().evaluateConditions(choice.conditions))
     },
 
-    evaluateConditions: (conditions: DialogueNode['conditions']) => {
+    evaluateConditions: (conditions: DialogueCondition[]) => {
       for (const condition of conditions) {
         let result = false
         switch (condition.type) {
@@ -302,13 +315,11 @@ export const useNarrativeStore = create<NarrativeStore>()(
             break
           }
           case 'item': {
-            const { usePlayerStore } = require('./playerStore')
             const hasItem = usePlayerStore.getState().inventory.some(i => i.id === condition.value)
             result = condition.operator === 'equals' ? hasItem : !hasItem
             break
           }
           case 'metro-card-level': {
-            const { usePlayerStore } = require('./playerStore')
             const level = usePlayerStore.getState().metroCard.level
             switch (condition.operator) {
               case 'equals': result = level === condition.value; break
@@ -319,13 +330,11 @@ export const useNarrativeStore = create<NarrativeStore>()(
             break
           }
           case 'time-of-day': {
-            const { useWorldStore } = require('./worldStore')
             const timeLabel = useWorldStore.getState().getTimeOfDayLabel()
             result = condition.operator === 'equals' ? timeLabel === condition.value : timeLabel !== condition.value
             break
           }
           case 'weather': {
-            const { useWorldStore } = require('./worldStore')
             const weather = useWorldStore.getState().weather
             result = condition.operator === 'equals' ? weather === condition.value : weather !== condition.value
             break
@@ -341,7 +350,7 @@ export const useNarrativeStore = create<NarrativeStore>()(
       return true
     },
 
-    executeDialogueAction: (action: { type: string; params: Record<string, unknown> }) => {
+    executeDialogueAction: (action: DialogueAction) => {
       switch (action.type) {
         case 'set-flag':
           get().setFlag(action.params.flagId as string, action.params.value as boolean | number | string)
@@ -359,24 +368,20 @@ export const useNarrativeStore = create<NarrativeStore>()(
           get().failQuest(action.params.questId as string)
           break
         case 'give-item': {
-          const { usePlayerStore } = require('./playerStore')
-          usePlayerStore.getState().addInventoryItem(action.params.item as any)
+          usePlayerStore.getState().addInventoryItem(action.params.item)
           break
         }
         case 'remove-item': {
-          const { usePlayerStore } = require('./playerStore')
           usePlayerStore.getState().removeInventoryItem(action.params.itemId as string, action.params.quantity as number)
           break
         }
         case 'add-metro-card-xp': {
-          const { usePlayerStore } = require('./playerStore')
           const xp = action.params.amount as number
           const card = usePlayerStore.getState().metroCard
           // TODO: Implement XP system
           break
         }
         case 'unlock-fast-travel': {
-          const { useWorldStore } = require('./worldStore')
           useWorldStore.getState().unlockFastTravel(action.params.stationId as string)
           break
         }
@@ -390,7 +395,6 @@ export const useNarrativeStore = create<NarrativeStore>()(
           // TODO: Teleport player
           break
         case 'set-time':
-          const { useWorldStore } = require('./worldStore')
           useWorldStore.getState().setTimeOfDay(action.params.time as number)
           break
       }
@@ -443,22 +447,20 @@ export const useNarrativeStore = create<NarrativeStore>()(
           // TODO: Grant XP
           break
         case 'balance': {
-          const { usePlayerStore } = require('./playerStore')
-          usePlayerStore.getState().updateMetroCard({ balance: usePlayerStore.getState().metroCard.balance + (reward.value as number) })
+          const currentBalance = usePlayerStore.getState().metroCard.balance
+          usePlayerStore.getState().updateMetroCard({ balance: currentBalance + (reward.value as number) })
           break
         }
         case 'item': {
-          const { usePlayerStore } = require('./playerStore')
-          usePlayerStore.getState().addInventoryItem(reward.value as any)
+          usePlayerStore.getState().addInventoryItem(reward.value)
           break
         }
         case 'lore': {
-          const { usePlayerStore } = require('./playerStore')
-          usePlayerStore.getState().updateMetroCard({ loreUnlocked: [...usePlayerStore.getState().metroCard.loreUnlocked, reward.value as string] })
+          const currentLore = usePlayerStore.getState().metroCard.loreUnlocked
+          usePlayerStore.getState().updateMetroCard({ loreUnlocked: [...currentLore, reward.value as string] })
           break
         }
         case 'fast-travel': {
-          const { useWorldStore } = require('./worldStore')
           useWorldStore.getState().unlockFastTravel(reward.value as string)
           break
         }
@@ -491,13 +493,6 @@ export const useNarrativeStore = create<NarrativeStore>()(
     }),
   }))
 )
-
-// Helper to emit events (would need gameStore)
-declare global {
-  interface Window {
-    __NARRATIVE_EMIT__?: (type: string, payload: unknown) => void
-  }
-}
 
 // Selector hooks
 export const useQuests = () => useNarrativeStore((state) => state.quests)

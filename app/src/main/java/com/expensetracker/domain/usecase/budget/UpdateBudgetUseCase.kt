@@ -7,7 +7,7 @@ import kotlin.Result
 class UpdateBudgetUseCase @Inject constructor(
     private val budgetRepository: BudgetRepository
 ) {
-    operator fun invoke(budget: Budget): Result<Unit> {
+    suspend operator fun invoke(budget: Budget): Result<Unit> {
         return try {
             budgetRepository.updateBudget(budget)
             Result.success(Unit)

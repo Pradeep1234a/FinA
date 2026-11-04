@@ -6,7 +6,7 @@ import kotlin.Result
 class InitializeDefaultCategoriesUseCase @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) {
-    operator fun invoke(): Result<Unit> {
+    suspend operator fun invoke(): Result<Unit> {
         return try {
             categoryRepository.initializeDefaultCategories()
             Result.success(Unit)

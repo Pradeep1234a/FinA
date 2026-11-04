@@ -3,7 +3,12 @@
     "allow": [
       "Bash(npm create *)",
       "Bash(npm install *)",
-      "Bash(rtk ls *)"
+      "Bash(rtk ls *)",
+      "Bash(git remote *)",
+      "Bash(rtk git *)",
+      "Bash(cat > *)",
+      "Bash(rtk gradlew *)",
+      "Bash(npm run *)"
     ]
   }
 }

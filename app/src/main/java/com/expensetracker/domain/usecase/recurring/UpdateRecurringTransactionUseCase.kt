@@ -7,7 +7,7 @@ import kotlin.Result
 class UpdateRecurringTransactionUseCase @Inject constructor(
     private val recurringTransactionRepository: RecurringTransactionRepository
 ) {
-    operator fun invoke(recurringTransaction: RecurringTransaction): Result<Unit> {
+    suspend operator fun invoke(recurringTransaction: RecurringTransaction): Result<Unit> {
         return try {
             recurringTransactionRepository.updateRecurringTransaction(recurringTransaction)
             Result.success(Unit)
