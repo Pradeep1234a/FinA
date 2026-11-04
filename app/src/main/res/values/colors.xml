@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Color Scheme - Light Theme -->
+    <color name="md_sys_color_primary">#6750A4</color>
+    <color name="md_sys_color_on_primary">#FFFFFF</color>
+    <color name="md_sys_color_primary_container">#EADDFF</color>
+    <color name="md_sys_color_on_primary_container">#21005D</color>
+    <color name="md_sys_color_secondary">#625B71</color>
+    <color name="md_sys_color_on_secondary">#FFFFFF</color>
+    <color name="md_sys_color_secondary_container">#E8DEF8</color>
+    <color name="md_sys_color_on_secondary_container">#1D192B</color>
+    <color name="md_sys_color_tertiary">#7D5260</color>
+    <color name="md_sys_color_on_tertiary">#FFFFFF</color>
+    <color name="md_sys_color_tertiary_container">#FFD8E4</color>
+    <color name="md_sys_color_on_tertiary_container">#31111D</color>
+    <color name="md_sys_color_error">#B3261E</color>
+    <color name="md_sys_color_on_error">#FFFFFF</color>
+    <color name="md_sys_color_error_container">#F9DEDC</color>
+    <color name="md_sys_color_on_error_container">#410E0B</color>
+    <color name="md_sys_color_background">#FFFBFE</color>
+    <color name="md_sys_color_on_background">#1C1B1F</color>
+    <color name="md_sys_color_surface">#FFFBFE</color>
+    <color name="md_sys_color_on_surface">#1C1B1F</color>
+    <color name="md_sys_color_surface_variant">#E7E0EC</color>
+    <color name="md_sys_color_on_surface_variant">#49454F</color>
+    <color name="md_sys_color_outline">#79747E</color>
+    <color name="md_sys_color_outline_variant">#CAC4D0</color>
+    <color name="md_sys_color_shadow">#000000</color>
+    <color name="md_sys_color_scrim">#000000</color>
+    <color name="md_sys_color_inverse_surface">#313033</color>
+    <color name="md_sys_color_inverse_on_surface">#F4EFF4</color>
+    <color name="md_sys_color_inverse_primary">#D0BCFF</color>
+    <color name="md_sys_color_primary_fixed">#EADDFF</color>
+    <color name="md_sys_color_on_primary_fixed">#21005D</color>
+    <color name="md_sys_color_primary_fixed_dim">#D0BCFF</color>
+    <color name="md_sys_color_on_primary_fixed_variant">#4F378B</color>
+    <color name="md_sys_color_secondary_fixed">#E8DEF8</color>
+    <color name="md_sys_color_on_secondary_fixed">#1D192B</color>
+    <color name="md_sys_color_secondary_fixed_dim">#CCC2DC</color>
+    <color name="md_sys_color_on_secondary_fixed_variant">#4A4458</color>
+    <color name="md_sys_color_tertiary_fixed">#FFD8E4</color>
+    <color name="md_sys_color_on_tertiary_fixed">#31111D</color>
+    <color name="md_sys_color_tertiary_fixed_dim">#EFB8C8</color>
+    <color name="md_sys_color_on_tertiary_fixed_variant">#633B48</color>
+    <color name="md_sys_color_surface_dim">#E7E0EC</color>
+    <color name="md_sys_color_surface_bright">#FFFBFE</color>
+    <color name="md_sys_color_surface_container_lowest">#FFFFFF</color>
+    <color name="md_sys_color_surface_container_low">#F7EDF8</color>
+    <color name="md_sys_color_surface_container">#F1E9EF</color>
+    <color name="md_sys_color_surface_container_high">#ECE6F0</color>
+    <color name="md_sys_color_surface_container_highest">#E6E0E9</color>
+
+    <!-- Material 3 Color Scheme - Dark Theme -->
+    <color name="md_sys_color_dark_primary">#D0BCFF</color>
+    <color name="md_sys_color_dark_on_primary">#381E72</color>
+    <color name="md_sys_color_dark_primary_container">#4F378B</color>
+    <color name="md_sys_color_dark_on_primary_container">#EADDFF</color>
+    <color name="md_sys_color_dark_secondary">#CCC2DC</color>
+    <color name="md_sys_color_dark_on_secondary">#332D41</color>
+    <color name="md_sys_color_dark_secondary_container">#4A4458</color>
+    <color name="md_sys_color_dark_on_secondary_container">#E8DEF8</color>
+    <color name="md_sys_color_dark_tertiary">#EFB8C8</color>
+    <color name="md_sys_color_dark_on_tertiary">#492532</color>
+    <color name="md_sys_color_dark_tertiary_container">#633B48</color>
+    <color name="md_sys_color_dark_on_tertiary_container">#FFD8E4</color>
+    <color name="md_sys_color_dark_error">#F2B8B5</color>
+    <color name="md_sys_color_dark_on_error">#601410</color>
+    <color name="md_sys_color_dark_error_container">#8C1D18</color>
+    <color name="md_sys_color_dark_on_error_container">#F9DEDC</color>
+    <color name="md_sys_color_dark_background">#1C1B1F</color>
+    <color name="md_sys_color_dark_on_background">#E6E1E5</color>
+    <color name="md_sys_color_dark_surface">#1C1B1F</color>
+    <color name="md_sys_color_dark_on_surface">#E6E1E5</color>
+    <color name="md_sys_color_dark_surface_variant">#49454F</color>
+    <color name="md_sys_color_dark_on_surface_variant">#CAC4D0</color>
+    <color name="md_sys_color_dark_outline">#938F99</color>
+    <color name="md_sys_color_dark_outline_variant">#49454F</color>
+    <color name="md_sys_color_dark_shadow">#000000</color>
+    <color name="md_sys_color_dark_scrim">#000000</color>
+    <color name="md_sys_color_dark_inverse_surface">#E6E1E5</color>
+    <color name="md_sys_color_dark_inverse_on_surface">#313033</color>
+    <color name="md_sys_color_dark_inverse_primary">#6750A4</color>
+    <color name="md_sys_color_dark_surface_dim">#1C1B1F</color>
+    <color name="md_sys_color_dark_surface_bright">#3D3C3F</color>
+    <color name="md_sys_color_dark_surface_container_lowest">#161519</color>
+    <color name="md_sys_color_dark_surface_container_low">#211F24</color>
+    <color name="md_sys_color_dark_surface_container">#252428</color>
+    <color name="md_sys_color_dark_surface_container_high">#2E2D30</color>
+    <color name="md_sys_color_dark_surface_container_highest">#38363A</color>
+
+    <!-- Category Colors -->
+    <color name="category_food">#FF6B6B</color>
+    <color name="category_transport">#4ECDC4</color>
+    <color name="category_shopping">#45B7D1</color>
+    <color name="category_entertainment">#96CEB4</color>
+    <color name="category_bills">#FFEAA7</color>
+    <color name="category_healthcare">#DDA0DD</color>
+    <color name="category_education">#98D8C8</color>
+    <color name="category_travel">#F7DC6F</color>
+    <color name="category_salary">#2ECC71</color>
+    <color name="category_freelance">#27AE60</color>
+    <color name="category_investments">#1ABC9C</color>
+    <color name="category_gifts">#16A085</color>
+
+    <!-- Chart Colors -->
+    <color name="chart_color_1">#6750A4</color>
+    <color name="chart_color_2">#625B71</color>
+    <color name="chart_color_3">#7D5260</color>
+    <color name="chart_color_4">#4ECDC4</color>
+    <color name="chart_color_5">#45B7D1</color>
+    <color name="chart_color_6">#96CEB4</color>
+    <color name="chart_color_7">#FFEAA7</color>
+    <color name="chart_color_8">#DDA0DD</color>
+    <color name="chart_color_9">#F7DC6F</color>
+    <color name="chart_color_10">#2ECC71</color>
+    <color name="chart_color_11">#E74C3C</color>
+    <color name="chart_color_12">#F39C12</color>
+
+    <!-- Semantic Colors -->
+    <color name="color_income">#2ECC71</color>
+    <color name="color_expense">#E74C3C</color>
+    <color name="color_budget_warning">#F39C12</color>
+    <color name="color_budget_danger">#E74C3C</color>
+    <color name="color_budget_safe">#2ECC71</color>
+
+    <!-- Default colors for views -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

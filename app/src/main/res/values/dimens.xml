@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing_xxs">2dp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_xxl">32dp</dimen>
+    <dimen name="spacing_xxxl">48dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_screen">16dp</dimen>
+    <dimen name="margin_card">12dp</dimen>
+    <dimen name="margin_fab">16dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_screen">16dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_button">12dp</dimen>
+    <dimen name="padding_chip">8dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="corner_radius_xs">4dp</dimen>
+    <dimen name="corner_radius_sm">8dp</dimen>
+    <dimen name="corner_radius_md">12dp</dimen>
+    <dimen name="corner_radius_lg">16dp</dimen>
+    <dimen name="corner_radius_xl">24dp</dimen>
+    <dimen name="corner_radius_xxl">28dp</dimen>
+    <dimen name="corner_radius_full">9999dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_card">1dp</dimen>
+    <dimen name="elevation_card_raised">4dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="elevation_bottom_sheet">8dp</dimen>
+    <dimen name="elevation_app_bar">4dp</dimen>
+    <dimen name="elevation_dialog">16dp</dimen>
+
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_xs">16dp</dimen>
+    <dimen name="icon_size_sm">20dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+    <dimen name="icon_size_lg">32dp</dimen>
+    <dimen name="icon_size_xl">48dp</dimen>
+    <dimen name="icon_size_category">40dp</dimen>
+    <dimen name="icon_size_chart_legend">12dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="text_size_xs">10sp</dimen>
+    <dimen name="text_size_sm">12sp</dimen>
+    <dimen name="text_size_md">14sp</dimen>
+    <dimen name="text_size_lg">16sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    <dimen name="text_size_xxl">20sp</dimen>
+    <dimen name="text_size_headline">28sp</dimen>
+    <dimen name="text_size_display">36sp</dimen>
+
+    <!-- Chart Dimensions -->
+    <dimen name="chart_height_small">150dp</dimen>
+    <dimen name="chart_height_medium">200dp</dimen>
+    <dimen name="chart_height_large">300dp</dimen>
+
+    <!-- Button Heights -->
+    <dimen name="button_height_min">48dp</dimen>
+    <dimen name="button_height_lg">56dp</dimen>
+
+    <!-- Bottom Navigation -->
+    <dimen name="bottom_nav_height">72dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    <dimen name="bottom_nav_text_size">10sp</dimen>
+
+    <!-- App Bar -->
+    <dimen name="app_bar_height">64dp</dimen>
+    <dimen name="app_bar_title_size">20sp</dimen>
+
+    <!-- List Items -->
+    <dimen name="list_item_height_min">56dp</dimen>
+    <dimen name="list_item_padding_horizontal">16dp</dimen>
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+
+    <!-- Divider -->
+    <dimen name="divider_thickness">1dp</dimen>
+
+    <!-- Animation Durations -->
+    <integer name="anim_duration_short">150</integer>
+    <integer name="anim_duration_medium">300</integer>
+    <integer name="anim_duration_long">500</integer>
+
+    <!-- Grid Columns -->
+    <integer name="grid_columns_phone">2</integer>
+    <integer name="grid_columns_tablet">3</integer>
+    <integer name="grid_columns_desktop">4</integer>
+</resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.ExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/md_sys_color_primary</item>
+        <item name="colorPrimaryVariant">@color/md_sys_color_primary_container</item>
+        <item name="colorOnPrimary">@color/md_sys_color_on_primary</item>
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/md_sys_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/md_sys_color_secondary_container</item>
+        <item name="colorOnSecondary">@color/md_sys_color_on_secondary</item>
+        <!-- Tertiary brand color -->
+        <item name="colorTertiary">@color/md_sys_color_tertiary</item>
+        <item name="colorTertiaryVariant">@color/md_sys_color_tertiary_container</item>
+        <item name="colorOnTertiary">@color/md_sys_color_on_tertiary</item>
+        <!-- Error color -->
+        <item name="colorError">@color/md_sys_color_error</item>
+        <item name="colorOnError">@color/md_sys_color_on_error</item>
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/md_sys_color_background</item>
+        <item name="colorSurface">@color/md_sys_color_surface</item>
+        <item name="colorOnSurface">@color/md_sys_color_on_surface</item>
+        <!-- Surface variant -->
+        <item name="colorSurfaceVariant">@color/md_sys_color_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md_sys_color_on_surface_variant</item>
+        <!-- Outline -->
+        <item name="colorOutline">@color/md_sys_color_outline</item>
+        <item name="colorOutlineVariant">@color/md_sys_color_outline_variant</item>
+        <!-- Status bar & Navigation bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <!-- Window -->
+        <item name="android:windowBackground">@color/md_sys_color_background</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Ripple -->
+        <item name="colorControlHighlight">@color/md_sys_color_primary_container</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.ExpenseTracker.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/md_sys_color_primary</item>
+        <item name="android:navigationBarColor">@color/md_sys_color_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- Light theme override -->
+    <style name="Theme.ExpenseTracker.Light" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_sys_color_primary</item>
+        <item name="colorPrimaryVariant">@color/md_sys_color_primary_container</item>
+        <item name="colorOnPrimary">@color/md_sys_color_on_primary</item>
+        <item name="colorSecondary">@color/md_sys_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/md_sys_color_secondary_container</item>
+        <item name="colorOnSecondary">@color/md_sys_color_on_secondary</item>
+        <item name="colorTertiary">@color/md_sys_color_tertiary</item>
+        <item name="colorTertiaryVariant">@color/md_sys_color_tertiary_container</item>
+        <item name="colorOnTertiary">@color/md_sys_color_on_tertiary</item>
+        <item name="colorError">@color/md_sys_color_error</item>
+        <item name="colorOnError">@color/md_sys_color_on_error</item>
+        <item name="android:colorBackground">@color/md_sys_color_background</item>
+        <item name="colorSurface">@color/md_sys_color_surface</item>
+        <item name="colorOnSurface">@color/md_sys_color_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md_sys_color_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md_sys_color_on_surface_variant</item>
+        <item name="colorOutline">@color/md_sys_color_outline</item>
+        <item name="colorOutlineVariant">@color/md_sys_color_outline_variant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <!-- Dark theme override -->
+    <style name="Theme.ExpenseTracker.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/md_sys_color_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/md_sys_color_dark_primary_container</item>
+        <item name="colorOnPrimary">@color/md_sys_color_dark_on_primary</item>
+        <item name="colorSecondary">@color/md_sys_color_dark_secondary</item>
+        <item name="colorSecondaryVariant">@color/md_sys_color_dark_secondary_container</item>
+        <item name="colorOnSecondary">@color/md_sys_color_dark_on_secondary</item>
+        <item name="colorTertiary">@color/md_sys_color_dark_tertiary</item>
+        <item name="colorTertiaryVariant">@color/md_sys_color_dark_tertiary_container</item>
+        <item name="colorOnTertiary">@color/md_sys_color_dark_on_tertiary</item>
+        <item name="colorError">@color/md_sys_color_dark_error</item>
+        <item name="colorOnError">@color/md_sys_color_dark_on_error</item>
+        <item name="android:colorBackground">@color/md_sys_color_dark_background</item>
+        <item name="colorSurface">@color/md_sys_color_dark_surface</item>
+        <item name="colorOnSurface">@color/md_sys_color_dark_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md_sys_color_dark_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md_sys_color_dark_on_surface_variant</item>
+        <item name="colorOutline">@color/md_sys_color_dark_outline</item>
+        <item name="colorOutlineVariant">@color/md_sys_color_dark_outline_variant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- Bottom Sheet Dialog Theme -->
+    <style name="Theme.ExpenseTracker.BottomSheetDialog" parent="Theme.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.ExpenseTracker.BottomSheet.Modal</item>
+    </style>
+
+    <style name="Widget.ExpenseTracker.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.ExpenseTracker.BottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearance.ExpenseTracker.BottomSheet" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- Chip Style -->
+    <style name="Widget.ExpenseTracker.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="android:paddingHorizontal">12dp</item>
+    </style>
+
+    <!-- Text Appearance Styles -->
+    <style name="TextAppearance.ExpenseTracker.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/roboto_flex</item>
+    </style>
+
+    <style name="TextAppearance.ExpenseTracker.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/roboto_flex</item>
+    </style>
+
+    <style name="TextAppearance.ExpenseTracker.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/roboto_flex</item>
+    </style>
+
+    <style name="TextAppearance.ExpenseTracker.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/roboto_flex</item>
+    </style>
+</resources>

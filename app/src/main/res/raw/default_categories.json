@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Food & Dining",
+    "icon": "restaurant",
+    "color": "#FF6B6B",
+    "type": "EXPENSE",
+    "sortOrder": 1
+  },
+  {
+    "name": "Transportation",
+    "icon": "directions_bus",
+    "color": "#4ECDC4",
+    "type": "EXPENSE",
+    "sortOrder": 2
+  },
+  {
+    "name": "Shopping",
+    "icon": "shopping_bag",
+    "color": "#45B7D1",
+    "type": "EXPENSE",
+    "sortOrder": 3
+  },
+  {
+    "name": "Entertainment",
+    "icon": "movie",
+    "color": "#96CEB4",
+    "type": "EXPENSE",
+    "sortOrder": 4
+  },
+  {
+    "name": "Bills & Utilities",
+    "icon": "receipt",
+    "color": "#FFEAA7",
+    "type": "EXPENSE",
+    "sortOrder": 5
+  },
+  {
+    "name": "Healthcare",
+    "icon": "local_hospital",
+    "color": "#DDA0DD",
+    "type": "EXPENSE",
+    "sortOrder": 6
+  },
+  {
+    "name": "Education",
+    "icon": "school",
+    "color": "#98D8C8",
+    "type": "EXPENSE",
+    "sortOrder": 7
+  },
+  {
+    "name": "Travel",
+    "icon": "flight",
+    "color": "#F7DC6F",
+    "type": "EXPENSE",
+    "sortOrder": 8
+  },
+  {
+    "name": "Salary",
+    "icon": "attach_money",
+    "color": "#2ECC71",
+    "type": "INCOME",
+    "sortOrder": 1
+  },
+  {
+    "name": "Freelance",
+    "icon": "laptop",
+    "color": "#27AE60",
+    "type": "INCOME",
+    "sortOrder": 2
+  },
+  {
+    "name": "Investments",
+    "icon": "trending_up",
+    "color": "#1ABC9C",
+    "type": "INCOME",
+    "sortOrder": 3
+  },
+  {
+    "name": "Gifts",
+    "icon": "card_giftcard",
+    "color": "#16A085",
+    "type": "INCOME",
+    "sortOrder": 4
+  }
+]

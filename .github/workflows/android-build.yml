@@ -1,0 +1,270 @@
+name: Android CI Build
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  build:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          ndk-version: r27b
+          build-tools-version: 34.0.0
+          emulator: false
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        # If gradlew doesn't exist, generate it
+        shell: bash
+        continue-on-error: true
+
+      - name: Generate Gradle Wrapper (if missing)
+        run: |
+          if [ ! -f "./gradlew" ]; then
+            echo "Gradle wrapper not found, generating..."
+            gradle wrapper --gradle-version 8.5 --distribution-type all
+          fi
+        shell: bash
+        continue-on-error: true
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+        shell: bash
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Get Version Code
+        id: version
+        run: |
+          VERSION_CODE=$(grep "versionCode" app/build.gradle.kts | head -1 | grep -oE '[0-9]+')
+          VERSION_NAME=$(grep "versionName" app/build.gradle.kts | head -1 | grep -oE '"[^"]+"' | tr -d '"')
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+
+  build-release:
+    name: Build Release APK
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          ndk-version: r27b
+          build-tools-version: 34.0.0
+          emulator: false
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+        shell: bash
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk-v${{ needs.build.outputs.version_name }}
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          retention-days: 90
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: app/build/outputs/apk/release/app-release-unsigned.apk
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            ## Expense Tracker ${{ github.ref_name }}
+
+            ### Changes
+            - Auto-generated release from GitHub Actions
+
+            ### Installation
+            1. Download `app-release-unsigned.apk`
+            2. Enable "Install unknown apps" in Android settings
+            3. Install the APK
+
+            ### Features
+            - Transaction tracking (income/expense)
+            - Category management
+            - Monthly budgets with alerts
+            - Recurring transactions
+            - Reports with charts
+            - Data export/import/backup
+            - Dark/Light theme support
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    name: Lint & Static Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          build-tools-version: 34.0.0
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Lint
+        run: ./gradlew lintDebug
+        shell: bash
+
+      - name: Upload Lint Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.html
+          retention-days: 7
+
+      - name: Run Detekt (if configured)
+        run: ./gradlew detekt
+        shell: bash
+        continue-on-error: true
+
+      - name: Upload Detekt Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: detekt-report
+          path: app/build/reports/detekt/detekt.html
+          retention-days: 7
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          build-tools-version: 34.0.0
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+        shell: bash
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: app/build/reports/tests/
+          retention-days: 7
+
+      - name: Run Instrumented Tests (with emulator)
+        run: |
+          echo "Starting emulator..."
+          emulator -avd test -no-snapshot-load -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -skin 1080x1920 &
+          sleep 30
+          adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          ./gradlew connectedDebugAndroidTest
+        shell: bash
+        continue-on-error: true
+        env:
+          ANDROID_SDK_ROOT: /opt/android/sdk
+          ANDROID_HOME: /opt/android/sdk
+
+      - name: Upload Instrumented Test Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: instrumented-test-reports
+          path: app/build/reports/androidTests/
+          retention-days: 7
