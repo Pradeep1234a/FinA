@@ -1,10 +1,10 @@
 buildscript {
-    dependencies {
-        val kotlinVersion by project
-        val hiltVersion by project
-        val composeCompilerVersion by project
-        val serializationVersion by project
+    val kotlinVersion: String by project
+    val hiltVersion: String by project
+    val composeCompilerVersion: String by project
+    val serializationVersion: String by project
 
+    dependencies {
         classpath("com.android.tools.build:gradle:8.5.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
