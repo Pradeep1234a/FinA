@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kapt)
     alias(libs.plugins.hilt)
 }
 
@@ -51,7 +52,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.12"
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE,NOTICE}"
         }
@@ -152,7 +153,7 @@ kapt {
     }
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions {
         freeCompilerArgs += listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
