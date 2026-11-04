@@ -63,10 +63,6 @@ android {
         dataBinding = true
     }
 
-    serializable {
-        generateParcelable = true
-    }
-
     hilt {
         enableAggregatingTask = true
     }
