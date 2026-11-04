@@ -118,7 +118,6 @@ dependencies {
 
     // Charts
     implementation(libs.mp.android.chart)
-    implementation(libs.compose.charts)
 
     // Serialization
     implementation(libs.kotlinx.serialization.json)
