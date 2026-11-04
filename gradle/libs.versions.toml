@@ -102,5 +102,5 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", ve
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-serialization = { id = "kotlin-serialization", version.ref = "kotlinSerial" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerial" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
