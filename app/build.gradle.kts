@@ -63,12 +63,6 @@ android {
         dataBinding = true
     }
 
-    kotlin {
-        extensions.configure("compose") {
-            version = "1.5.12"
-        }
-    }
-
     serializable {
         generateParcelable = true
     }
